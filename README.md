@@ -4,27 +4,35 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/challgren/aircraft-goaround)](https://github.com/challgren/aircraft-goaround/issues)
 
-Real-time aircraft go-around detection system that monitors TAR1090 feeds to identify and track aborted landing attempts, providing instant alerts and comprehensive analysis of these critical safety maneuvers.
+Real-time aircraft go-around detection system that monitors TAR1090 feeds to
+identify and track aborted landing attempts, providing instant alerts and
+comprehensive analysis of these critical safety maneuvers.
 
 ![Go-Around Tracker Screenshot](docs/images/screenshot.png)
 
 ## 🛬 What is a Go-Around?
 
-A go-around (also called aborted landing, missed approach, or wave-off) occurs when an aircraft on final approach or that has already touched down aborts the landing and rapidly climbs to circle back for another attempt. Go-arounds occur in approximately 1-3 per 1000 approaches and are a normal safety procedure.
+A go-around (also called aborted landing, missed approach, or wave-off) occurs
+when an aircraft on final approach or that has already touched down aborts the
+landing and rapidly climbs to circle back for another attempt. Go-arounds occur
+in approximately 1-3 per 1000 approaches and are a normal safety procedure.
 
 ## 🎯 Features
 
 ### Go-Around Detection
 
-- **Real-time Monitoring**: Continuously analyzes aircraft altitude and vertical rate patterns
-- **Multi-factor Detection**: Uses altitude minimums, climb rates, and flight path analysis
+- **Real-time Monitoring**: Continuously analyzes aircraft altitude and
+  vertical rate patterns
+- **Multi-factor Detection**: Uses altitude minimums, climb rates, and flight
+  path analysis
 - **Confidence Scoring**: Assigns confidence levels (0-1.0) based on detection criteria
 - **Severity Classification**: Categorizes events as HIGH, MEDIUM, or LOW severity
 
 ### Web Interface
 
 - **Live Map View**: Real-time visualization of active go-arounds with flight paths
-- **Color-coded Aircraft**: Red for active go-arounds, orange for potential, blue for normal
+- **Color-coded Aircraft**: Red for active go-arounds, orange for potential,
+  blue for normal
 - **Historical Tracking**: Browse and filter all detected go-around events
 - **Statistics Dashboard**: Daily detection counts and performance metrics
 - **TAR1090 Integration**: Direct links to view events in TAR1090
@@ -52,7 +60,8 @@ docker run -d \
 
 ### With Public TAR1090 URL
 
-If your TAR1090 instance is accessible at a different URL for users (e.g., through a reverse proxy):
+If your TAR1090 instance is accessible at a different URL for users (e.g.,
+through a reverse proxy):
 
 ```bash
 docker run -d \
@@ -254,21 +263,25 @@ Go-around events are logged to CSV with the following fields:
 Based on aviation statistics, go-arounds occur for these reasons:
 
 ### Weather (Most Common)
+
 - Strong winds or wind shear
 - Poor visibility (fog, heavy rain)
 - Thunderstorms or microbursts
 
 ### Runway Issues
+
 - Runway occupied by another aircraft
 - Animals or debris on runway
 - Slow-to-clear traffic
 
 ### Unstabilized Approach
+
 - Too high or too fast on approach
 - Incorrect aircraft configuration
 - ATC spacing requirements
 
 ### Technical Issues
+
 - Landing gear problems
 - System warnings or alerts
 - Bird strikes
@@ -351,18 +364,22 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE)
+file for details.
 
 ## 🙏 Acknowledgments
 
-- Based on the architecture of [Aircraft Circle](https://github.com/challgren/aircraft-circle) detector
+- Based on the architecture of
+  [Aircraft Circle](https://github.com/challgren/aircraft-circle) detector
 - Uses [TAR1090](https://github.com/wiedehopf/tar1090) for ADS-B data
 - Inspired by the aviation safety community
 - Aircraft visualization concepts from tar1090 project
 
 ## 📞 Support
 
-For issues, questions, or suggestions, please [open an issue](https://github.com/challgren/aircraft-goaround/issues) on GitHub.
+For issues, questions, or suggestions, please
+[open an issue](https://github.com/challgren/aircraft-goaround/issues) on
+GitHub.
 
 ---
 

@@ -1,6 +1,7 @@
 # Contributing to Aircraft Go-Around Tracker
 
-Thank you for your interest in contributing to Aircraft Go-Around Tracker! This document provides guidelines and instructions for contributing to the project.
+Thank you for your interest in contributing to Aircraft Go-Around Tracker! This
+document provides guidelines and instructions for contributing to the project.
 
 ## Code of Conduct
 

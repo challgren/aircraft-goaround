@@ -1,10 +1,14 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with
+code in this repository.
 
 ## Project Overview
 
-Aircraft Go-Around Tracker is a Python-based detection system for monitoring aircraft via TAR1090 feeds. It identifies go-around events (aborted landings) in real-time by analyzing altitude, vertical rate, and flight path data, with a Flask web interface for visualization.
+Aircraft Go-Around Tracker is a Python-based detection system for monitoring
+aircraft via TAR1090 feeds. It identifies go-around events (aborted landings)
+in real-time by analyzing altitude, vertical rate, and flight path data, with
+a Flask web interface for visualization.
 
 ## Key Architecture
 
@@ -37,7 +41,8 @@ Aircraft Go-Around Tracker is a Python-based detection system for monitoring air
 docker build -t aircraft-goaround:dev .
 
 # Multi-architecture build
-docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t aircraft-goaround:dev .
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 \
+  -t aircraft-goaround:dev .
 
 # Run locally with Docker
 docker run -it --rm -p 8889:8889 -e TAR1090_URL=http://your-tar1090:80 aircraft-goaround:dev
@@ -112,19 +117,25 @@ Go-around detections are logged to:
 
 - `/app/data/go_around_detections.csv`
 
-Each entry includes timestamp, aircraft info, altitude data, climb rate, duration, confidence, and TAR1090 URL.
+Each entry includes timestamp, aircraft info, altitude data, climb rate,
+duration, confidence, and TAR1090 URL.
 
 ## Common Issues and Solutions
 
-1. **Docker s6 service fails**: Check shebang in run script is `#!/command/with-contenv bash`
+1. **Docker s6 service fails**: Check shebang in run script is
+   `#!/command/with-contenv bash`
 
-2. **No aircraft showing**: Verify TAR1090_URL is accessible and returns data at `/data/aircraft.json`
+2. **No aircraft showing**: Verify TAR1090_URL is accessible and returns data
+   at `/data/aircraft.json`
 
-3. **No go-arounds detected**: These are rare events (1-3 per 1000 approaches) - monitor near busy airports
+3. **No go-arounds detected**: These are rare events (1-3 per 1000
+   approaches) - monitor near busy airports
 
-4. **Reverse proxy issues**: Ensure proxy sets proper headers and uses `proxy_redirect / /subpath/`
+4. **Reverse proxy issues**: Ensure proxy sets proper headers and uses
+   `proxy_redirect / /subpath/`
 
-5. **Markdown linting failures**: Files must end with newline, code blocks need surrounding blank lines
+5. **Markdown linting failures**: Files must end with newline, code blocks
+   need surrounding blank lines
 
 ## Testing TAR1090 Connection
 
@@ -135,6 +146,7 @@ curl http://your-tar1090/data/aircraft.json
 ```
 
 Should return JSON with `aircraft` or `ac` array containing objects with:
+
 - `hex`: ICAO identifier
 - `lat`, `lon`: Position
 - `alt_baro` or `alt_geom`: Altitude
@@ -153,6 +165,7 @@ The detector identifies go-arounds by:
 6. Calculating confidence score based on multiple factors
 
 Confidence scoring weights:
+
 - Low altitude (< 2000 ft): +0.3
 - Rapid climb (> 1500 ft/min): +0.4
 - Normal climb (> 1000 ft/min): +0.2
