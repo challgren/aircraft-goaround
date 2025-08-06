@@ -371,7 +371,7 @@ file for details.
 ## 🙏 Acknowledgments
 
 - Based on the architecture of
-  [Aircraft Circle](https://github.com/challgren/aircraft-circle) detector
+  [Aircraft Patterns](https://github.com/challgren/aircraft-patterns) detector
 - Uses [TAR1090](https://github.com/wiedehopf/tar1090) for ADS-B data
 - Inspired by the aviation safety community
 - Aircraft visualization concepts from tar1090 project
