@@ -1,8 +1,11 @@
 # Aircraft Go-Around Tracker - Real-time Aborted Landing Detection
 
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/challgren/aircraft-goaround/deploy.yml?branch=main&label=build)](https://github.com/challgren/aircraft-goaround/actions/workflows/deploy.yml)
 [![Docker Image Size](https://ghcr-badge.egpl.dev/challgren/aircraft-goaround/size)](https://github.com/challgren/aircraft-goaround/pkgs/container/aircraft-goaround)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/challgren/aircraft-goaround)](https://github.com/challgren/aircraft-goaround/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/challgren/aircraft-goaround?style=social)](https://github.com/challgren/aircraft-goaround/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/challgren/aircraft-goaround)](https://github.com/challgren/aircraft-goaround/commits/main)
 
 Real-time aircraft go-around detection system that monitors TAR1090 feeds to
 identify and track aborted landing attempts, providing instant alerts and
