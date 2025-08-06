@@ -9,12 +9,4 @@ exec python3 /app/go_around_tracker.py \
     --server "${TAR1090_URL}" \
     --web \
     --web-port 8889 \
-    --airport-distance "${AIRPORT_DISTANCE:-10}" \
-    --altitude-threshold "${ALTITUDE_THRESHOLD:-2000}" \
-    --min-climb-rate "${MIN_CLIMB_RATE:-1000}" \
-    --rapid-climb-rate "${RAPID_CLIMB_RATE:-1500}" \
-    --altitude-recovery "${ALTITUDE_RECOVERY:-500}" \
-    --time-window "${TIME_WINDOW:-120}" \
-    --confidence-threshold "${CONFIDENCE_THRESHOLD:-0.6}" \
-    --update-interval "${UPDATE_INTERVAL:-5}" \
-    --debug
+    --interval "${UPDATE_INTERVAL:-5}"
