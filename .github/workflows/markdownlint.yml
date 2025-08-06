@@ -1,5 +1,8 @@
 name: Markdown Lint
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     paths:
@@ -12,9 +15,6 @@ on:
     paths:
       - "**.md"
       - ".github/workflows/markdownlint.yml"
-
-permissions:
-  contents: read
 
 jobs:
   markdownlint:
