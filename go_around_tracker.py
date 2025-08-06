@@ -17,7 +17,10 @@ MAP_HTML_TEMPLATE = '''
     <script>
         // Determine base URL from current location
         const pathname = window.location.pathname;
-        const baseUrl = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+        // Handle both root and subpath deployments
+        const baseUrl = pathname.endsWith('/') ? pathname.slice(0, -1) : 
+                       pathname.endsWith('/history') ? pathname.replace(/\/history$/, '') : 
+                       pathname;
         
         // Aircraft icon shapes from tar1090
         const aircraftShapes = {
@@ -607,7 +610,10 @@ HISTORY_HTML_TEMPLATE = '''
     
     <script>
         const pathname = window.location.pathname;
-        const baseUrl = pathname.replace(/\/history$/, '');
+        // Handle both root and subpath deployments
+        const baseUrl = pathname.endsWith('/history') ? pathname.replace(/\/history$/, '') : 
+                       pathname.endsWith('/') ? pathname.slice(0, -1) : 
+                       pathname;
         
         let allEvents = [];
         
