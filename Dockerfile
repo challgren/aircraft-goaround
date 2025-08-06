@@ -26,6 +26,7 @@ COPY rootfs/ /
 
 # Environment variables
 ENV TAR1090_URL=http://tar1090:8080 \
+    PUBLIC_TAR1090_URL="" \
     WEB_INTERFACE=true \
     WEB_PORT=8889 \
     UPDATE_INTERVAL=5

@@ -12,6 +12,8 @@ services:
       - PGID=1000
       - TZ=UTC
       - TAR1090_URL=http://tar1090:80
+      # Optional: Public URL for TAR1090 (if different from internal URL)
+      # - PUBLIC_TAR1090_URL=https://radar.example.com/map
       - WEB_INTERFACE=true
       - WEB_PORT=8889
       - UPDATE_INTERVAL=5

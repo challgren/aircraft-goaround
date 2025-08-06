@@ -50,6 +50,21 @@ docker run -d \
   ghcr.io/challgren/aircraft-goaround:latest
 ```
 
+### With Public TAR1090 URL
+
+If your TAR1090 instance is accessible at a different URL for users (e.g., through a reverse proxy):
+
+```bash
+docker run -d \
+  --name=aircraft-goaround \
+  -p 8889:8889 \
+  -e TAR1090_URL=http://tar1090:80 \
+  -e PUBLIC_TAR1090_URL=https://radar.example.com/map \
+  -v ./data:/app/data \
+  --restart unless-stopped \
+  ghcr.io/challgren/aircraft-goaround:latest
+```
+
 ### Using Docker Compose
 
 ```yaml
@@ -91,7 +106,8 @@ python3 go_around_tracker.py --server http://your-tar1090:8080 --web
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `TAR1090_URL` | URL of your TAR1090 instance | `http://tar1090:80` |
+| `TAR1090_URL` | Internal URL of your TAR1090 instance | `http://tar1090:80` |
+| `PUBLIC_TAR1090_URL` | Public URL for TAR1090 links (optional) | Same as `TAR1090_URL` |
 | `WEB_PORT` | Port for web interface | `8889` |
 | `WEB_INTERFACE` | Enable web interface | `true` |
 | `UPDATE_INTERVAL` | Data refresh interval (seconds) | `5` |
@@ -197,6 +213,7 @@ location /goaround/ {
     proxy_set_header Host $http_host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Prefix /goaround;
     proxy_redirect / /goaround/;
 }
 ```

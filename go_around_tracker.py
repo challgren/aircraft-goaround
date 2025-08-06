@@ -918,8 +918,9 @@ class GoAroundDetector:
 
 
 class TAR1090Monitor:
-    def __init__(self, server_url: str, update_interval: int = 5):
+    def __init__(self, server_url: str, update_interval: int = 5, public_url: str = None):
         self.server_url = server_url.rstrip('/')
+        self.public_url = (public_url.rstrip('/') if public_url else server_url.rstrip('/'))
         self.update_interval = update_interval
         self.aircraft: Dict[str, Aircraft] = {}
         self.detector = GoAroundDetector()
@@ -1091,7 +1092,7 @@ class TAR1090Monitor:
                                 max_climb_rate=go_around_data['max_climb_rate'],
                                 duration=duration,
                                 confidence=go_around_data['detection'].confidence,
-                                tar1090_url=f"{self.server_url}/?icao={hex_id}"
+                                tar1090_url=f"{self.public_url}/?icao={hex_id}"
                             )
                             self.log_go_around(log_entry)
                             logger.info(f"Go-around completed: {aircraft.callsign} ({hex_id}) - Duration: {duration}s")
@@ -1170,7 +1171,7 @@ class TAR1090Monitor:
                     'confidence': detection.confidence,
                     'duration': int(time.time() - go_around_data['start_time']),
                     'trigger_reason': detection.trigger_reason,
-                    'tar1090_url': f"{self.server_url}/?icao={hex_id}",
+                    'tar1090_url': f"{self.public_url}/?icao={hex_id}",
                     'recent_path': [{'lat': p.lat, 'lon': p.lon} for p in list(aircraft.path)[-20:]]
                 })
         
@@ -1296,7 +1297,8 @@ def main():
     args = parser.parse_args()
     
     # Create monitor
-    monitor = TAR1090Monitor(args.server, args.interval)
+    public_url = os.environ.get('PUBLIC_TAR1090_URL', args.server)
+    monitor = TAR1090Monitor(args.server, args.interval, public_url)
     
     if args.test:
         print(f"Testing connection to {args.server}...")
