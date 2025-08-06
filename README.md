@@ -1,6 +1,6 @@
 # Aircraft Go-Around Tracker - Real-time Aborted Landing Detection
 
-[![Docker Image Size](https://ghcr-badge.deta.dev/challgren/aircraft-goaround/size)](https://github.com/challgren/aircraft-goaround/pkgs/container/aircraft-goaround)
+[![Docker Image Size](https://ghcr-badge.egpl.dev/challgren/aircraft-goaround/size)](https://github.com/challgren/aircraft-goaround/pkgs/container/aircraft-goaround)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/challgren/aircraft-goaround)](https://github.com/challgren/aircraft-goaround/issues)
 
