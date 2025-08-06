@@ -13,6 +13,9 @@ on:
       - "**.md"
       - ".github/workflows/markdownlint.yml"
 
+permissions:
+  contents: read
+
 jobs:
   markdownlint:
     name: Run markdownlint

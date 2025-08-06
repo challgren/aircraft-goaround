@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   aircraft-goaround:
     image: ghcr.io/challgren/aircraft-goaround:latest

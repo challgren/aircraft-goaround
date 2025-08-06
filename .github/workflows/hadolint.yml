@@ -13,6 +13,9 @@ on:
       - "Dockerfile*"
       - ".github/workflows/hadolint.yml"
 
+permissions:
+  contents: read
+
 jobs:
   hadolint:
     name: Run hadolint

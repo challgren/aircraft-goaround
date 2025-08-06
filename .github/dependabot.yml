@@ -22,6 +22,11 @@ updates:
       include: "scope"
     pull-request-branch-name:
       separator: "/"
+    versioning-strategy: "increase"
+    groups:
+      python-dependencies:
+        patterns:
+          - "*"
     # To ignore specific dependencies, uncomment and add them here:
     # ignore:
     #   - dependency-name: "package-name"
@@ -43,6 +48,10 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+    groups:
+      docker-dependencies:
+        patterns:
+          - "*"
 
   # GitHub Actions
   - package-ecosystem: "github-actions"
@@ -60,3 +69,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
