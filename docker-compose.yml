@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  aircraft-goaround:
+    image: ghcr.io/challgren/aircraft-goaround:latest
+    container_name: aircraft-goaround
+    restart: unless-stopped
+    ports:
+      - 8889:8889
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - TAR1090_URL=http://tar1090:80
+      - WEB_INTERFACE=true
+      - WEB_PORT=8889
+      - UPDATE_INTERVAL=5
+      # Detection parameters
+      - LOW_ALTITUDE_THRESHOLD=2000
+      - MIN_CLIMB_RATE=1000
+      - RAPID_CLIMB_RATE=1500
+      - ALTITUDE_RECOVERY=500
+      - TIME_WINDOW=120
+    volumes:
+      - ./data:/app/data
+    tmpfs:
+      - /run:exec,size=64M
+      - /tmp:size=128M
+    networks:
+      - adsbnet
+
+  # Example: Running with tar1090
+  tar1090:
+    image: ghcr.io/sdr-enthusiasts/docker-tar1090:latest
+    container_name: tar1090
+    restart: unless-stopped
+    environment:
+      - BEASTHOST=readsb
+      - LAT=YOUR_LATITUDE
+      - LONG=YOUR_LONGITUDE
+      - TZ=UTC
+    ports:
+      - 8080:80
+    tmpfs:
+      - /run:exec,size=64M
+      - /tmp:size=128M
+    networks:
+      - adsbnet
+
+networks:
+  adsbnet:
+    driver: bridge
