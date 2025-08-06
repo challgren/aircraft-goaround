@@ -22,10 +22,10 @@ updates:
       include: "scope"
     pull-request-branch-name:
       separator: "/"
-    ignore:
-      # Add any dependencies to ignore here
-      # - dependency-name: "package-name"
-      #   versions: ["x.x.x"]
+    # To ignore specific dependencies, uncomment and add them here:
+    # ignore:
+    #   - dependency-name: "package-name"
+    #     versions: ["x.x.x"]
 
   # Docker dependencies
   - package-ecosystem: "docker"
