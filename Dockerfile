@@ -21,16 +21,8 @@ RUN mkdir -p /app/data && \
 # Copy application
 COPY go_around_tracker.py .
 
-# Setup s6-overlay service
-RUN mkdir -p /etc/s6-overlay/s6-rc.d/go-around-tracker \
-             /etc/s6-overlay/s6-rc.d/user/contents.d \
-             /etc/s6-overlay/s6-rc.d/go-around-tracker/dependencies.d && \
-    echo '#!/command/with-contenv bash' > /etc/s6-overlay/s6-rc.d/go-around-tracker/run && \
-    echo 'exec python3 /app/go_around_tracker.py --web' >> /etc/s6-overlay/s6-rc.d/go-around-tracker/run && \
-    chmod +x /etc/s6-overlay/s6-rc.d/go-around-tracker/run && \
-    echo 'longrun' > /etc/s6-overlay/s6-rc.d/go-around-tracker/type && \
-    touch /etc/s6-overlay/s6-rc.d/user/contents.d/go-around-tracker && \
-    touch /etc/s6-overlay/s6-rc.d/go-around-tracker/dependencies.d/base
+# Copy rootfs
+COPY rootfs/ /
 
 # Environment variables
 ENV TAR1090_URL=http://tar1090:8080 \
@@ -43,4 +35,4 @@ EXPOSE 8889
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD python3 -c "import requests; r = requests.get('http://localhost:8889/api/health'); exit(0 if r.status_code == 200 else 1)"
+    CMD python3 /scripts/healthcheck.py

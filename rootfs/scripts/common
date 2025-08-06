@@ -1,0 +1,31 @@
+#!/command/with-contenv bash
+# shellcheck shell=bash disable=SC1091
+
+# Common functions and variables for scripts
+
+# Set default values
+export TAR1090_URL="${TAR1090_URL:-http://tar1090:80}"
+export AIRPORT_DISTANCE="${AIRPORT_DISTANCE:-10}"
+export ALTITUDE_THRESHOLD="${ALTITUDE_THRESHOLD:-2000}"
+export MIN_CLIMB_RATE="${MIN_CLIMB_RATE:-1000}"
+export RAPID_CLIMB_RATE="${RAPID_CLIMB_RATE:-1500}"
+export ALTITUDE_RECOVERY="${ALTITUDE_RECOVERY:-500}"
+export TIME_WINDOW="${TIME_WINDOW:-120}"
+export CONFIDENCE_THRESHOLD="${CONFIDENCE_THRESHOLD:-0.6}"
+export UPDATE_INTERVAL="${UPDATE_INTERVAL:-5}"
+export HEALTHCHECK_PORT="${HEALTHCHECK_PORT:-8889}"
+
+# Function to check if TAR1090 is available
+check_tar1090() {
+    local url="${TAR1090_URL}/data/aircraft.json"
+    if curl -s -f -o /dev/null "$url"; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Function to log messages
+log_msg() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
