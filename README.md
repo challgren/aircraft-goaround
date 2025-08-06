@@ -116,7 +116,7 @@ python3 go_around_tracker.py --server http://your-tar1090:8080 --web
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `TAR1090_URL` | Internal URL of your TAR1090 instance | `http://tar1090:80` |
-| `PUBLIC_TAR1090_URL` | Public URL for TAR1090 links (optional) | Same as `TAR1090_URL` |
+| `PUBLIC_TAR1090_URL` | Public TAR1090 URL (optional) | Same as `TAR1090_URL` |
 | `WEB_PORT` | Port for web interface | `8889` |
 | `WEB_INTERFACE` | Enable web interface | `true` |
 | `UPDATE_INTERVAL` | Data refresh interval (seconds) | `5` |
@@ -208,7 +208,8 @@ Access at: `http://localhost:8889/history`
 
 ### Reverse Proxy Support
 
-The application works seamlessly behind reverse proxies including when mounted at a subpath.
+The application works seamlessly behind reverse proxies including when mounted
+at a subpath.
 
 #### Nginx Configuration Example
 
