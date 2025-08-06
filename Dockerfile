@@ -12,31 +12,24 @@ RUN set -x && \
 
 # Create app directory and data directory
 WORKDIR /app
-RUN mkdir -p /app/data
 
 # Copy requirements and install Python packages
 COPY requirements.txt .
-RUN python3 -m pip install --no-cache-dir --break-system-packages -r requirements.txt
+RUN mkdir -p /app/data && \
+    python3 -m pip install --no-cache-dir --break-system-packages -r requirements.txt
 
 # Copy application
 COPY go_around_tracker.py .
 
-# Create s6-overlay service directory structure
-RUN mkdir -p /etc/s6-overlay/s6-rc.d/go-around-tracker /etc/s6-overlay/s6-rc.d/user/contents.d
-
-# Create the service run script
-RUN echo '#!/command/with-contenv bash' > /etc/s6-overlay/s6-rc.d/go-around-tracker/run && \
+# Setup s6-overlay service
+RUN mkdir -p /etc/s6-overlay/s6-rc.d/go-around-tracker \
+             /etc/s6-overlay/s6-rc.d/user/contents.d \
+             /etc/s6-overlay/s6-rc.d/go-around-tracker/dependencies.d && \
+    echo '#!/command/with-contenv bash' > /etc/s6-overlay/s6-rc.d/go-around-tracker/run && \
     echo 'exec python3 /app/go_around_tracker.py --web' >> /etc/s6-overlay/s6-rc.d/go-around-tracker/run && \
-    chmod +x /etc/s6-overlay/s6-rc.d/go-around-tracker/run
-
-# Set service type
-RUN echo 'longrun' > /etc/s6-overlay/s6-rc.d/go-around-tracker/type
-
-# Add to user bundle
-RUN touch /etc/s6-overlay/s6-rc.d/user/contents.d/go-around-tracker
-
-# Create dependencies directory and add base dependency
-RUN mkdir -p /etc/s6-overlay/s6-rc.d/go-around-tracker/dependencies.d && \
+    chmod +x /etc/s6-overlay/s6-rc.d/go-around-tracker/run && \
+    echo 'longrun' > /etc/s6-overlay/s6-rc.d/go-around-tracker/type && \
+    touch /etc/s6-overlay/s6-rc.d/user/contents.d/go-around-tracker && \
     touch /etc/s6-overlay/s6-rc.d/go-around-tracker/dependencies.d/base
 
 # Environment variables
